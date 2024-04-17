@@ -1,8 +1,22 @@
 Login
-![login](https://github.com/avikumar0/evently/assets/114355501/5acc515d-120d-46a4-89be-ff38204b1650)
+
+![Login](https://github.com/avikumar0/evently/assets/114355501/7c162b9b-c1a4-4786-b105-b5c8dcc29c13)
+
 Home
-![home](https://github.com/avikumar0/evently/assets/114355501/e5b3e651-4ff4-4edd-9ed8-811c3dde3df0)
-Create Event Form
-![events](https://github.com/avikumar0/evently/assets/114355501/02ab4424-d78f-445c-83e4-bdd374328a83)
-My Liked Events
-![my-events](https://github.com/avikumar0/evently/assets/114355501/16ca2546-c02b-46e4-bd3c-2ac665a6d6e3)
+
+![Home-1](https://github.com/avikumar0/evently/assets/114355501/33a16aac-6c26-4d9a-ac31-ddb783dcc079)
+
+![Home-2](https://github.com/avikumar0/evently/assets/114355501/04cad10a-202f-4ecb-bde7-b7f7f33ea8eb)
+
+Create-Event
+
+![Create-Event-1](https://github.com/avikumar0/evently/assets/114355501/c3395b87-828d-4cb6-ab2a-1cd50874be20)
+
+![Create-Event-2](https://github.com/avikumar0/evently/assets/114355501/f8b22e8e-b0c5-47df-9bff-d9f934bee2d4)
+
+Liked Events
+
+![Liked_Event-1](https://github.com/avikumar0/evently/assets/114355501/7e195a4e-fffc-4229-80fa-9dfe977ece2f)
+
+
+![Liked_Event-2](https://github.com/avikumar0/evently/assets/114355501/8061adf2-3bb8-49bf-883e-3a89112a1620)
