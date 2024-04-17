@@ -1,53 +1,40 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { FaSearch } from 'react-icons/fa';
-import AuthContext from '../context/AuthContext';
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { FaSearch } from 'react-icons/fa'; 
+
 function Navbar() {
-  const { logoutUser } = useContext(AuthContext);
-  const token = localStorage.getItem('authTokens');
+  const location = useLocation();
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div className="container">
-        {/* <Link className="navbar-brand" to="/">
-          <img src="/logo.svg" alt="EventBrite" style={{ width: '120px', padding: '6px' }} />
-        </Link> */}
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse justify-content-between" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link className="nav-link" to="/" aria-current="page">Home</Link>
-            </li>
-            {token === null ?
-              <>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/login">Login</Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/register">Register</Link>
-                </li>
-              </>
-              :
-              <>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/events">Create Event</Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/my-events">My Events</Link>
-                </li>
-                <li className="nav-item">
-                  <button className="btn btn-link nav-link" onClick={logoutUser}>Logout</button>
-                </li>
-              </>
-            }
-          </ul>
-          <form className="d-flex">
-            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-            <button className="btn btn-outline-light" type="submit"><FaSearch /></button>
-          </form>
+    <nav className="bg-gray-900 shadow-lg">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between py-4">
+          <div className="text-white">
+            <Link className="text-2xl font-bold" to="/">Home</Link>
+            <Link
+              className={`ml-6 text-lg ${location.pathname === '/events' ? 'text-white' : 'text-gray-300 hover:text-white'}`}
+              to="/events"
+            >
+              Create Event
+            </Link>
+            <Link
+              className={`ml-6 text-lg ${location.pathname === '/my-events' ? 'text-white' : 'text-gray-300 hover:text-white'}`}
+              to="/my-events"
+            >
+              My Events
+            </Link>
+          </div>
+          <div className="flex items-center"> 
+            <FaSearch className="text-gray-500 mr-2" />
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search"
+                className="px-4 py-2 bg-gray-800 text-gray-300 placeholder-gray-500 rounded-md focus:outline-none focus:bg-gray-700 focus:text-white"
+              />
+            </div>
+            <Link className="ml-6 text-lg text-gray-300 hover:text-white" to="/logout">Logout</Link>
+          </div>
         </div>
       </div>
     </nav>

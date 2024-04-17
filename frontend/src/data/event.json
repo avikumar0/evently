@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "event_name": "Event 1",
+        "date": "2024-04-23",
+        "time": "12:00:00",
+        "location": "Kolkata",
+        "image": "/images/download_3_utEUUME.jpeg",
+        "is_liked": true
+    },
+    {
+        "id": 2,
+        "event_name": "Event 2",
+        "date": "2024-04-15",
+        "time": "12:00:00",
+        "location": "New Delhi",
+        "image": "/images/download.jpeg",
+        "is_liked": true
+        },
+    {
+        "id": 3,
+        "event_name": "Event 3",
+        "date": "2024-04-30",
+        "time": "13:42:00",
+        "location": "Mumbai",
+        "image": "/images/download_1.jpeg",
+        "is_liked": false
+    },
+    {
+        "id": 4,
+        "event_name": "Event4",
+        "date": "2024-04-29",
+        "time": "01:00:00",
+        "location": "New Delhi",
+        "image": "/images/download_3_jetwyhp.jpeg",
+        "is_liked": false
+    }
+]

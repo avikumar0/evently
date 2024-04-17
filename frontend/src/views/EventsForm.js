@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import useAxios from '../utils/useAxios';
 
 function EventsForm() {
   const [eventName, setEventName] = useState('');
@@ -8,59 +7,79 @@ function EventsForm() {
   const [location, setLocation] = useState('');
   const [image, setImage] = useState(null);
 
-  const axiosInstance = useAxios(); 
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-  
-    // Prepare form data
-    const formData = new FormData();
-    formData.append('event_name', eventName);
-    formData.append('date', date);
-    formData.append('time', time);
-    formData.append('location', location);
-    formData.append('image', image);
-  
-    try {
-      const response = await axiosInstance.post('/events/', formData); // Use axiosInstance for authorized request
-      console.log('Event created:', response.data);
-      // Reset form fields after successful submission
-      setEventName('');
-      setDate('');
-      setTime('');
-      setLocation('');
-      setImage(null);
-    } catch (error) {
-      console.error('Error creating event:', error.response.data); // Log error response data
-    }
+    // Handle form submission here (no backend interaction for now)
+    console.log("Form submitted:", { eventName, date, time, location, image });
+    // Reset form fields after submission
+    setEventName('');
+    setDate('');
+    setTime('');
+    setLocation('');
+    setImage(null);
   };
-  
 
   return (
-    <div className="container" style={{ marginTop: '50px' }}> {/* Added inline style marginTop here */}
-      <h2 className="mb-4">Create Event</h2>
+    <div className="container mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+      <h2 className="text-2xl font-semibold mb-4">Create Event</h2>
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="eventName" className="form-label">Event Name:</label>
-          <input type="text" className="form-control" id="eventName" value={eventName} onChange={(e) => setEventName(e.target.value)} required />
+        <div className="mb-6">
+          <label htmlFor="eventName" className="block text-gray-700 font-bold mb-2">Event Name:</label>
+          <input
+            type="text"
+            id="eventName"
+            className="form-input mt-1 block w-full px-3 py-2 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
+            placeholder="Enter event name"
+            value={eventName}
+            onChange={(e) => setEventName(e.target.value)}
+            required
+          />
         </div>
-        <div className="mb-3">
-          <label htmlFor="date" className="form-label">Date:</label>
-          <input type="date" className="form-control" id="date" value={date} onChange={(e) => setDate(e.target.value)} required />
+        <div className="mb-6">
+          <label htmlFor="date" className="block text-gray-700 font-bold mb-2">Date:</label>
+          <input
+            type="date"
+            id="date"
+            className="form-input mt-1 block w-full px-3 py-2 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            required
+          />
         </div>
-        <div className="mb-3">
-          <label htmlFor="time" className="form-label">Time:</label>
-          <input type="time" className="form-control" id="time" value={time} onChange={(e) => setTime(e.target.value)} required />
+        <div className="mb-6">
+          <label htmlFor="time" className="block text-gray-700 font-bold mb-2">Time:</label>
+          <input
+            type="time"
+            id="time"
+            className="form-input mt-1 block w-full px-3 py-2 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
+            value={time}
+            onChange={(e) => setTime(e.target.value)}
+            required
+          />
         </div>
-        <div className="mb-3">
-          <label htmlFor="location" className="form-label">Location:</label>
-          <input type="text" className="form-control" id="location" value={location} onChange={(e) => setLocation(e.target.value)} required />
+        <div className="mb-6">
+          <label htmlFor="location" className="block text-gray-700 font-bold mb-2">Location:</label>
+          <input
+            type="text"
+            id="location"
+            className="form-input mt-1 block w-full px-3 py-2 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
+            placeholder="Enter location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            required
+          />
         </div>
-        <div className="mb-3">
-          <label htmlFor="image" className="form-label">Image:</label>
-          <input type="file" className="form-control-file" id="image" onChange={(e) => setImage(e.target.files[0])} required />
+        <div className="mb-6">
+          <label htmlFor="image" className="block text-gray-700 font-bold mb-2">Image:</label>
+          <input
+            type="file"
+            id="image"
+            className="form-input mt-1 block w-full px-3 py-2 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
+            onChange={(e) => setImage(e.target.files[0])}
+            required
+          />
         </div>
-        <button type="submit" className="btn btn-primary">Create Event</button>
+        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Create Event</button>
       </form>
     </div>
   );

@@ -1,76 +1,60 @@
 import React, { useState, useEffect } from 'react';
-import useAxios from '../utils/useAxios';
-import { FaHeart } from 'react-icons/fa';
+import { FaHeart, FaCalendarAlt, FaClock, FaMapMarkerAlt } from 'react-icons/fa';
+import eventData from '../data/event.json';
 
 function MyEvents() {
-  const axiosInstance = useAxios();
   const [likedEvents, setLikedEvents] = useState([]);
 
   useEffect(() => {
-    // Fetch liked events from the Django backend API based on IDs stored in local storage
-    const likedEventsIds = JSON.parse(localStorage.getItem('likedEvents')) || [];
-    axiosInstance.get('http://localhost:8000/api/events/', {
-      params: { ids: likedEventsIds.join(',') }
-    })
-      .then(response => {
-        setLikedEvents(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching liked events:', error.response.data);
-      });
+    // Filter liked events from eventData
+    const filteredEvents = eventData.filter(event => event.is_liked);
+    setLikedEvents(filteredEvents);
   }, []);
 
-  const handleLike = (eventId) => {
-    // Update the liked status of the event
-    const updatedEvents = likedEvents.map(event => {
-      if (event.id === eventId) {
-        return { ...event, isLiked: !event.isLiked };
-      }
-      return event;
-    });
-    setLikedEvents(updatedEvents);
-
-    // You can also make a POST request to update the liked status in the backend
+  const formatTime = (time) => {
+    const hour = parseInt(time.split(':')[0]);
+    let formattedTime = '';
+    if (hour === 0) {
+      formattedTime = '12 AM';
+    } else if (hour === 12) {
+      formattedTime = '12 PM';
+    } else if (hour < 12) {
+      formattedTime = `${hour} AM`;
+    } else {
+      formattedTime = `${hour - 12} PM`;
+    }
+    return formattedTime;
   };
 
   return (
-    <div>
-      <main role="main" style={{ marginTop: 55 }}>
-        <div className="container">
-          <h1 className="display-3">My Liked Events</h1>
-          <div className="row">
-            {likedEvents.map(event => (
-              <div key={event.id} className="col-md-4 mb-4 mt-3">
-                <div className="card">
-                  <div style={{ height: '200px', overflow: 'hidden' }}>
-                    <img
-                      src={`http://127.0.0.1:8000/${event.image}`}
-                      className="card-img-top"
-                      alt={event.event_name}
-                      style={{ objectFit: 'cover', height: '100%', width: '100%' }}
-                    />
-                  </div>
-                  <div className="card-body d-flex justify-content-between align-items-center">
-                    <div>
-                      <h5 className="card-title">{event.event_name}</h5>
-                      <p className="card-text">Date: {event.date}</p>
-                      <p className="card-text">Time: {event.time}</p>
-                      <p className="card-text">Location: {event.location}</p>
-                    </div>
-                    <div className="d-flex ">
-                      <button className="btn btn-primary mr-2">Details</button>
-                      <button className={`btn ${event.isLiked ? 'btn-danger' : 'btn-primary'}`} onClick={() => handleLike(event.id)}>
-                        <FaHeart />
-                      </button>
-                    </div>
-                  </div>
+    <div className="bg-gray-100 min-h-screen">
+      <main className="container mx-auto py-12">
+        <h1 className="text-4xl font-bold mb-8">My Liked Events</h1>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {likedEvents.map(event => (
+            <div key={event.id} className="rounded-lg overflow-hidden shadow-md transition-all duration-300 transform hover:scale-105">
+              <img
+                src={`http://localhost:8000/${event.image}`}
+                className="w-full h-64 object-cover object-center hover:opacity-75 transition duration-300 "
+                alt={event.event_name}
+              />
+              <div className="p-6 bg-white">
+                <h5 className="text-xl font-semibold mb-2">{event.event_name}</h5>
+                <p className="text-gray-700 mb-2 flex items-center"><FaCalendarAlt className="mr-2" />{event.date}</p>
+                <p className="text-gray-700 mb-2 flex items-center"><FaClock className="mr-2" />{formatTime(event.time)}</p> {/* Use formatTime function */}
+                <p className="text-gray-700 mb-4 flex items-center"><FaMapMarkerAlt className="mr-2" />{event.location}</p>
+                <div className="flex justify-between items-center">
+                  <button className="px-4 py-2 bg-blue-500 text-white rounded-full mr-2 hover:bg-blue-600 transition duration-300">Details</button>
+                  <button className={`px-4 py-2 ${event.is_liked ? 'bg-red-500' : 'bg-blue-500'} text-white rounded-full hover:bg-opacity-75 transition duration-300`}>
+                    <FaHeart />
+                  </button>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </main>
-      <footer className="container">
+      <footer className="bg-gray-900 text-white py-4 text-center">
         <p>© Company 2023-2024</p>
       </footer>
     </div>
